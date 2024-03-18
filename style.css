@@ -133,6 +133,7 @@ section#grid .square.clicked-bomba {
 
 /* Stile del contenuto all'interno dei quadrati quando vengono cliccati */
 section#grid .square.clicked > span,
-section#grid .square.clicked-odd > span {
+section#grid .square.clicked-odd > span,
+section#grid .square.clicked-bomba > span {
     display: inline;
 }
