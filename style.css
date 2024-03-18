@@ -37,6 +37,23 @@ body {
     transition: transform 0.3s ease, box-shadow 0.3s ease; 
     font-weight: bold; 
 }
+#resetBtn {
+    text-align: center;
+    padding: 10px 20px;
+    color: #fff; 
+    background-color: red;
+    border: none;
+    border-radius: 5px; 
+    transition: transform 0.3s ease, box-shadow 0.3s ease; 
+    font-weight: bold; 
+    margin-right: 20px;
+
+}
+#resetBtn:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); 
+    cursor: pointer;
+    transform: scale(1.05); 
+}
 
 /* Stile del pulsante #btn quando viene fatto hover */
 #btn:hover {
@@ -107,6 +124,12 @@ section#grid .square.clicked {
 section#grid .square.clicked-odd {
     background-color: magenta;
 }
+
+/* Stile della bomba */
+section#grid .square.clicked-bomba {
+    background-color: rgb(255, 0, 0);
+}
+
 
 /* Stile del contenuto all'interno dei quadrati quando vengono cliccati */
 section#grid .square.clicked > span,

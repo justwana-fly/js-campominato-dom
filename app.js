@@ -1,74 +1,81 @@
-// creo una funzione che non ha argomenti
-function generateNewGridSquare(content){
-    // definisco un nuovo elemento del dom e lo creo come <article></article>
-    const newElement = document.createElement('article');
-    newElement.innerHTML = '<span>' + content + '</span>';
- 
-    // aggiungo al nuovo elemento la classe .square
-    newElement.classList.add('square');
- 
-    // ritorno il nuovo elemento creato
-    return newElement;
-}
+document.addEventListener('DOMContentLoaded', function() {
+    const gridElement = document.getElementById('grid');
+    const btn = document.getElementById('btn');
+    const resetBtn = document.getElementById('resetBtn'); // Seleziona il bottone di reset
 
-// # recupero dal DOM l'elemento section con id grid e
-// # lo assegno ad una nuova variabile globale gridElement
-const gridElement = document.querySelector('section#grid');
+    // Aggiungi un evento di ascolto al pulsante "GIOCA"
+    btn.addEventListener('click', function() {
+        generateGrid(gridElement);
+    });
 
-// Funzione per eseguire il codice quando il pulsante viene cliccato
-function onButtonClick() {
-    // # ripeto per 100 volte
-    for (let index = 0; index < 100; index++) {
-        // % creazione di un nuovo quadrato che assegno ad una nuova const newSquare
-        const newSquare = generateNewGridSquare(index + 1);
-    
-        // ? quando l-utente clicca sul nostro quadrato
-        newSquare.addEventListener('click', function(){
-            // # se il contenuto e' pari
-            if (isEven(index + 1)){
-                // #aggiungo la classe clicked
-                newSquare.classList.add('clicked');
+    // Aggiungi un evento di ascolto al pulsante "RESET"
+    resetBtn.addEventListener('click', function() {
+        resetGame(gridElement);
+    });
+});
+
+function generateGrid(gridElement) {
+    // Genera 16 posizioni casuali per le bombe
+    const bombPositions = generateBombPositions();
+
+    // Ripeti per 100 volte (dimensione della griglia)
+    for (let i = 0; i < 100; i++) {
+        // Creazione di un nuovo quadrato
+        const newSquare = generateNewGridSquare(i + 1);
+
+        // Aggiungi un gestore di eventi per il clic
+        newSquare.addEventListener('click', function() {
+            if (bombPositions.includes(i)) {
+                newSquare.classList.add('clicked-bomba');
+                endGame();
             } else {
-                // #altrimenti aggiungo la classe clicked-odd
-                newSquare.classList.add('clicked-odd');
+                if (isEven(i + 1)) {
+                    newSquare.classList.add('clicked');
+                } else {
+                    newSquare.classList.add('clicked-odd');
+                }
             }
         });
-    
-        // % aggiungo il mio nuovo quadrato alla grid precedemente selezionata
+
+        // Aggiungi il quadrato alla griglia
         gridElement.appendChild(newSquare);
     }
 }
 
-// Aggiungi un evento di ascolto al pulsante
-const btn = document.getElementById('btn');
-btn.addEventListener('click', onButtonClick);
+// Funzione per generare 16 posizioni casuali per le bombe
+function generateBombPositions() {
+    const positions = [];
+    while (positions.length < 16) {
+        const position = Math.floor(Math.random() * 100);
+        if (!positions.includes(position)) {
+            positions.push(position);
+        }
+    }
+    return positions;
+}
 
-function isEven(number){
-    if (number % 2 === 0){
-        return true;
-    } else {
-        return false;
+// Funzione per terminare il gioco
+function endGame() {
+    alert('Hai cliccato su una bomba! Game Over!');
+}
+
+// Funzione per verificare se un numero è pari
+function isEven(number) {
+    return number % 2 === 0;
+}
+
+// Funzione per generare un nuovo quadrato
+function generateNewGridSquare(content) {
+    const newElement = document.createElement('article');
+    newElement.innerHTML = '<span>' + content + '</span>';
+    newElement.classList.add('square');
+    return newElement;
+}
+
+// Funzione per reimpostare il gioco
+function resetGame(gridElement) {
+    // Rimuovi tutti gli elementi figlio dalla griglia
+    while (gridElement.firstChild) {
+        gridElement.removeChild(gridElement.firstChild);
     }
 }
-
-
-/*
-
-function generaNumeroCasuale(min, max, blacklist) {
-    let numeroCasuale;
-
-    do {
-        numeroCasuale = Math.floor(Math.random() * (max - min + 1)) + min;
-    } while (blacklist.includes(numeroCasuale));
-
-    return numeroCasuale;
-}
-
-const min = 1;
-const max = 10;
-const blacklist = [1, 3, 5, 7];
-
-const numeroRandomico = generaNumeroCasuale(min, max, blacklist);
-console.log("Numero casuale generato:", numeroRandomico);
-
-*/
