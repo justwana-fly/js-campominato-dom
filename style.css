@@ -1,0 +1,115 @@
+/* Reset CSS per azzerare margini, padding e utilizzare box-sizing */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Stile dell'header */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    background-color: white;
+    padding: 20px;
+}
+
+/* Stile dell'h1 all'interno dell'header */
+header h1 {
+    font-size: 50px;
+}
+
+/* Stile del body */
+body {
+    background-color: #7FFFD4;
+    height: 100vh;
+}
+
+/* Stile del pulsante #btn */
+#btn {
+    text-align: center;
+    padding: 10px 20px;
+    color: #fff; 
+    background: linear-gradient(45deg, #4fc3f7, #28b6cf); 
+    border: none;
+    border-radius: 5px; 
+    transition: transform 0.3s ease, box-shadow 0.3s ease; 
+    font-weight: bold; 
+}
+
+/* Stile del pulsante #btn quando viene fatto hover */
+#btn:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); 
+    cursor: pointer;
+    transform: scale(1.05); 
+}
+
+/* Stile del footer */
+footer {
+    width: 100%;
+    padding: 20px;
+    background-color: white;
+    position: fixed;
+    bottom: 0;
+} 
+
+/* Stile del main */
+main {
+    padding-top: 50px;
+}
+
+/* Clearfix per pulire i float */
+.clearfix::after {
+    content: '';
+    clear: both;
+    display: table;
+}
+
+/* Stile della sezione #grid */
+section#grid {
+    margin: 0 auto;
+    width: 650px;
+    height: 650px;
+}
+
+/* Stile degli articoli quadrati all'interno della sezione #grid */
+section#grid > article.square {
+    float: left;
+    width: calc(100% / 10);
+    height: calc(100% / 10);
+    cursor: crosshair;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+/* Stile della sezione #grid e dei suoi quadrati */
+section#grid,
+section#grid .square {
+    border: 2px solid white;
+    color: white;
+    font-size: 1.5rem;
+}
+
+/* Stile del contenuto all'interno dei quadrati quando viene cliccato */
+section#grid .square > span {
+    display: none;
+}
+
+/* Stile dei quadrati quando vengono cliccati con indice pari */
+section#grid .square.clicked {
+    background-color: aqua;
+}
+
+/* Stile dei quadrati quando vengono cliccati con indice dispari */
+section#grid .square.clicked-odd {
+    background-color: magenta;
+}
+
+/* Stile del contenuto all'interno dei quadrati quando vengono cliccati */
+section#grid .square.clicked > span,
+section#grid .square.clicked-odd > span {
+    display: inline;
+}
